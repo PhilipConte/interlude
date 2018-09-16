@@ -1,0 +1,10 @@
+\documentclass{letter}
+
+\begin{document}
+
+\title{%$Title}
+\author{%$Author}
+
+\maketitle
+
+\end{document}
