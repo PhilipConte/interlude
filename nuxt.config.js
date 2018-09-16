@@ -14,6 +14,13 @@ module.exports = {
     ]
   },
   /*
+  ** Global CSS
+  */
+ css: [
+  { src: '~/assets/css/main.scss', lang: 'scss' },
+  { src: 'font-awesome/scss/font-awesome.scss', lang: 'scss' }
+],
+  /*
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
@@ -33,7 +40,15 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    },
+    vendor: ['bulma', 'vee-validate'],
+    postcss: {
+      plugins: {
+        'postcss-custom-properties': {
+          warnings: false
+        }
+      }
     }
-  }
+  },
+  plugins: ['~/plugins/vee-validate'],
 }
-

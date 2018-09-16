@@ -9,12 +9,9 @@
         JavaScript Resume Builder
       </h2>
       <div class="links">
+        <nuxt-link to="input" class="button--green">Get Started</nuxt-link>
         <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
+          href="https://github.com/PhilipConte/interlude"
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
@@ -23,7 +20,7 @@
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import AppLogo from '~/components/index/AppLogo.vue'
 
 export default {
   components: {
