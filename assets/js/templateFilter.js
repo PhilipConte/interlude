@@ -52,13 +52,13 @@ function findTagsAndReplace(str, tagJSON)
 function findKey(str, position)
 {
   var key = "";
-  for (var length = 1; i < str.length-position; length++) {
+  for (var length = 1; length < str.length-position; length++) {
     if (!isAlphanumeric(str.charCodeAt(position+length))) {
       return key;
     }
     key += str.charAt(position+length);
   }
-  return null; // Error
+  return "Error"; // Error
 }
 
 // Method to check if a character code is alphanumeric
@@ -67,7 +67,7 @@ function findKey(str, position)
 // code -- the char code
 function isAlphanumeric(code)
 {
-  return (!(code > 47 && code < 58) && // numeric (0-9)
-        !(code > 64 && code < 91) && // upper alpha (A-Z)
-        !(code > 96 && code < 123));
+  return ((code > 47 && code < 58) && // numeric (0-9)
+        (code > 64 && code < 91) && // upper alpha (A-Z)
+        (code > 96 && code < 123));
 }
