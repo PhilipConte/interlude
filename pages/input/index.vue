@@ -15,31 +15,26 @@
       </div>
 
       <div class="column">
-        <section class="section" id="results">
-          <div class="box">
-            <string-modal label='add a section' v-on:return="createSection"/>
-            <hr>
-            <ul v-if="sections.length">
-              <li v-for="section in sections" :key="section.name">
-                {{ section.name }}
-              </li>
-            </ul>
-            <p v-else>↑ create your first section</p>
-          </div>
-        </section>
+        <floating-side-bar
+          :sections="sections"
+          v-on:createSection="createSection"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SectionFormList from '~/components/input/SectionFormList.vue';
 import StringModal from '~/components/general/modals/StringModal.vue';
+
+import SectionFormList from '~/components/input/SectionFormList.vue';
+import FloatingSideBar from '~/components/input/FloatingSideBar.vue'
 
 export default {
   components: {
+    StringModal,
     SectionFormList,
-    StringModal
+    FloatingSideBar,
   },
   data() {
     return {
@@ -48,17 +43,9 @@ export default {
     };
   },
   methods: {
-    createSection(section) {
-      this.sections.push({ name: section, elements: [] });
+    createSection(newSection) {
+      this.sections.push({ name: newSection, elements: [] });
     },
   },
 };
 </script>
-
-<style lang="scss">
-#results {
-  position: fixed;
-  right: 0;
-  top: 10%;
-}
-</style>
