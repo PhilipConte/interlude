@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section" id="results">
     <div class="box">
       <string-modal label='add a section' v-on:return="createSection"/>
       <hr>
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
+#results {
   position: fixed;
   right: 0;
   top: 10%;
