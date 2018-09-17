@@ -43,7 +43,8 @@
       </button>
     </div>
     <button
-      class="button is-primary"
+      class="button"
+      :class="color"
       @click="active = true"
     >
       {{ label }}
@@ -53,7 +54,10 @@
 
 <script>
 export default {
-  props: ['label'],
+  props: {
+    'label': {},
+    'color': { default: 'is-primary' },
+  },
   data() {
     return {
       active: false,
