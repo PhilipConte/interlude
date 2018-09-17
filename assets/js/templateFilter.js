@@ -29,18 +29,15 @@ function loadTextFile(file)
 // A stirng with the data placed into the locations of the tags
 function findTagsAndReplace(str, tagJSON)
 {
-  var testChar;
-  for (var x = 0; x < str.length-1; x++)
-  {
-    if (str.charAt(x) == tag.charAt(0) && str.charAt(x+1) == tag.charAt(1)) {
-      var key = findKey(str, x+2);
-      if (key != null) {
-        var value = tagJSON[key];
-        str = str.slice(0,x)+value+str.slice(x+value.length);
-      }
-
-    }
+  var keyStr = "";
+  var substrings = str.split(tag); //Assume that the first substring does not start with a tag
+  var outputStr = substrings[0];
+  for (var i = 1; i < substrings.length; i++) {
+    keyStr = findKey(substrings[i],key.length)
+    outputStr += tagJSON[keyStr]+substrings[i].slice(key.length+keyStr.length);
   }
+
+  return outputStr;
 }
 
 
