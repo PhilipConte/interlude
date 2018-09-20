@@ -18,6 +18,7 @@
                   class="input"
                   type="text"
                   placeholder="your text here..."
+                  v-focus="active"
                 >
               </div>
               <p class="help is-danger" v-show="errors.has('text')">
@@ -55,21 +56,33 @@
 <script>
 export default {
   props: {
-    'label': {},
-    'color': { default: 'is-primary' },
+    label: {},
+    color: { default: "is-primary" }
   },
   data() {
     return {
       active: false,
-      text: "",
+      text: ""
     };
   },
   methods: {
     doSubmit() {
-      this.$emit('return', this.text);
+      this.$emit("return", this.text);
       this.active = false;
       this.text = "";
-    },
+    }
   },
-}
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus();
+      },
+      update(el, binding) {
+        if (binding.value) {
+          el.focus();
+        }
+      }
+    }
+  }
+};
 </script>
