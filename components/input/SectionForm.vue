@@ -10,7 +10,7 @@
             <string-modal
               label='edit name'
               color='is-info'
-              v-on:return="updateName"
+              v-on:return="section.name = $event"
             />
           </div>
           <div class="level-item">
@@ -31,34 +31,30 @@
 </template>
 
 <script>
-import StringModal from '~/components/general/modals/StringModal.vue';
-import ElementForm from '~/components/input/ElementForm.vue';
+import StringModal from "~/components/general/modals/StringModal.vue";
+import ElementForm from "~/components/input/ElementForm.vue";
 
 export default {
   components: {
     StringModal,
-    ElementForm,
+    ElementForm
   },
-  props: ['section'],
+  props: ["section"],
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     createElement(element) {
       this.section.elements.push({
         title: element,
-        subTitle: '',
-        location: '',
-        date: '',
-        lineItems: []
+        subTitle: "",
+        location: "",
+        date: "",
+        lineItems: [""]
       });
-    },
-    updateName(newName) {
-      this.section.name = newName;
-    },
-  },
-}
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
