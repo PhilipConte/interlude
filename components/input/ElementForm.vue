@@ -63,12 +63,11 @@ export default {
   methods: {
     updateLi: function(o) {
       Vue.set(this.element.lineItems, o.index, o.value);
-      if (
-        !o.value.length &&
-        this.element.lineItems.filter(li => !li.length).length > 1
-      ) {
+
+      let numEmpties = this.element.lineItems.filter(i => !i.length).length;
+      if (!o.value.length && numEmpties > 1) {
         Vue.delete(this.element.lineItems, o.index);
-      } else if (this.element.lineItems.every(li => li.length)) {
+      } else if (numEmpties == 0) {
         this.element.lineItems.push("");
       }
     }
