@@ -1,8 +1,8 @@
 <template>
 <div class="control">
   <input
-  type="text" class="input two-thirds"
-  placeholder="line-item (optional)"
+  type="text" class="input"
+  :placeholder="placeholder +' (optional)'"
   v-bind="$attrs"
   v-bind:value="value"
   v-on="inputListeners"
@@ -12,7 +12,7 @@
 <script>
 export default {
   inheritAttrs: false,
-  props: ["value", "index"],
+  props: ["value", "index", "placeholder",],
   computed: {
     inputListeners() {
       var vm = this;
@@ -28,7 +28,6 @@ export default {
 
 <style lang="scss" scoped>
 input {
-  max-width: 75%;
   margin-top: 2px;
   margin-bottom: 2px;
 }

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="subtitle is-2">Your Sections</h1>
     <ul v-if="sections.length">
       <li v-for="section in sections" :key="section.name">
         <section-form :section="section"/>

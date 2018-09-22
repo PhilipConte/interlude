@@ -36,8 +36,8 @@
 
     <div class="panel-block" v-for="(li, index) in element.lineItems" :key="index">
       <line-item
-        v-bind:value="element.lineItems[index]" :index="index"
-        v-on:input="updateLi($event)"
+        :value="element.lineItems[index]" :index="index"
+        @input="updateLi($event)" :placeholder="'line-item'"
       />
     </div>
   </div>
@@ -58,7 +58,7 @@ export default {
     return {};
   },
   methods: {
-    updateLi: function(o) {
+    updateLi(o) {
       Vue.set(this.element.lineItems, o.index, o.value);
 
       let numEmpties = this.element.lineItems.filter(i => !i.length).length;
