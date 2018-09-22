@@ -2,7 +2,13 @@
 // Currently going to use %$ as a tag
 const tag = "%$";
 
+//exports
+export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace};
+
+
+
 // Method that loads the textfile from the server
+// file is url of desired file
 // Uses xmlhttp and a GET request
 // Returns a DOMString
 function loadTextFile(file)
@@ -39,6 +45,7 @@ function delimPairs(str, location, leftDelim, rightDelim)
 
 
 // Method to look through the template str and find and Multi Tags
+// Example "%$Multi(tagStr)< this is a thing %$Opt(name)<other thing> //>"
 function multiTagFindAndReplace(str, tagJSON)
 {
   var tag = "%$";
@@ -51,6 +58,12 @@ function multiTagFindAndReplace(str, tagJSON)
   var openTagLoc = str.search("<",tagEnd);
   var closedTagLoc = delimPairs(str, openTagLoc, '<', '>')+1;
   var multiString = str.slice(openTagLoc, closedTagLoc);
+
+  var numberOfElemnts = 3; // TODO: arbitrary choice to be change later
+
+  for (var i = 0; i < numberOfElemnts; i++) {
+
+  }
 
   console.log(str.slice(openTagLoc,closedTagLoc));
 }
