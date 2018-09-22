@@ -14,12 +14,15 @@
 
           <h1 class="subtitle is-2">Your Sections</h1>
           <div>
-            <template v-if="resume.sections.length">
+            <draggable
+              v-if="resume.sections.length"
+              v-model="resume.sections" @start="drag=true" @end="drag=false"
+            >
               <section-form
                 v-for="section in resume.sections" :key="section.name"
                 :section="section"
               />
-            </template>
+            </draggable>
             <p v-else>create your first section →</p>
           </div>
       </div>
@@ -36,6 +39,8 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 import StringModal from "~/components/general/modals/StringModal.vue";
 
 import SectionForm from "~/components/input/SectionForm.vue";
@@ -46,6 +51,7 @@ import {} from "~/assets/js/templateFilter.js";
 
 export default {
   components: {
+    draggable,
     StringModal,
     SectionForm,
     AboutYou,
@@ -67,7 +73,7 @@ export default {
   },
   methods: {
     createSection(newSection) {
-      this.resume.sections.push({ name: newSection, elements: [''] });
+      this.resume.sections.push({ name: newSection, elements: [] });
     },
     sendresume() {
       return;
@@ -78,6 +84,6 @@ export default {
 
 <style lang="scss" scoped>
 .is-two-thirds {
-  padding-left: 30px
+  padding-left: 30px;
 }
 </style>
