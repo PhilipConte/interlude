@@ -2,7 +2,13 @@
 // Currently going to use %$ as a tag
 const tag = "%$";
 
+//exports
+export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace};
+
+
+
 // Method that loads the textfile from the server
+// file is url of desired file
 // Uses xmlhttp and a GET request
 // Returns a DOMString
 function loadTextFile(file)
@@ -18,8 +24,55 @@ function loadTextFile(file)
   return result;
 }
 
+// location is the index of the first Delim
+// Return the location of the end Delim
+function delimPairs(str, location, leftDelim, rightDelim)
+{
+  var count = 0;
+  for (var i = location; i < str.length; i++) {
+    if (str.charAt(i)==leftDelim) {
+      count++;
+    }
+    else if (str.charAt(i)==rightDelim) {
+      count--;
+    }
+    if(count==0){
+      return i;
+    }
+  }
+
+}
+
+
+// Method to look through the template str and find and Multi Tags
+// Example "%$Multi(tagStr)< this is a thing %$Opt(name)<other thing> //>"
+function multiTagFindAndReplace(str, tagJSON)
+{
+  var tag = "%$";
+  var searchTerm = tag+"Multi";
+  var multiPos = str.search(searchTerm);
+  tag = str.slice(multiPos+searchTerm.length+1);
+  var tagEnd = str.indexOf(')');
+  tag = tag.slice(0,tagEnd);
+
+  var openTagLoc = str.search("<",tagEnd);
+  var closedTagLoc = delimPairs(str, openTagLoc, '<', '>')+1;
+  var multiString = str.slice(openTagLoc, closedTagLoc);
+
+  var numberOfElemnts = 3; // TODO: arbitrary choice to be change later
+
+  for (var i = 0; i < numberOfElemnts; i++) {
+
+  }
+
+  console.log(str.slice(openTagLoc,closedTagLoc));
+}
+
+
 // Method to look through the template string loaded from the server
 // and find and replace all the tags with the data from the JSON.
+//
+// Only works with basic Tags and no special tags
 //
 // Inputs:
 // string -- the string with the tags to be replaced
@@ -27,7 +80,7 @@ function loadTextFile(file)
 //
 // Returns:
 // A stirng with the data placed into the locations of the tags
-function findTagsAndReplace(str, tagJSON)
+function plainTagFindAndReplace(str, tagJSON)
 {
   var keyStr = "";
   var substrings = str.split(tag); //Assume that the first substring does not start with a tag
