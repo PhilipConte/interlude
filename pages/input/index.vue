@@ -18,6 +18,7 @@
         <floating-side-bar
           :sections="sections"
           v-on:createSection="createSection"
+          v-on:sendresume="sendresume"
         />
       </div>
     </div>
@@ -28,7 +29,9 @@
 import StringModal from '~/components/general/modals/StringModal.vue';
 
 import SectionFormList from '~/components/input/SectionFormList.vue';
-import FloatingSideBar from '~/components/input/FloatingSideBar.vue'
+import FloatingSideBar from '~/components/input/FloatingSideBar.vue';
+
+import {} from '~/assets/js/templateFilter.js'
 
 export default {
   components: {
@@ -39,13 +42,15 @@ export default {
   data() {
     return {
       sections: [],
-      temp: '',
     };
   },
   methods: {
     createSection(newSection) {
       this.sections.push({ name: newSection, elements: [] });
     },
+    sendresume() {
+      return
+    }
   },
 };
 </script>
