@@ -4,39 +4,34 @@
 
     <div class="panel-block">
       <div class="level">
-        <div class="level-left"><div>
-          <div class="control">
-            <input
-              type="text" class="input"
-              v-model="element.subTitle"
-              placeholder="subtitle (optional)"
-            >
-          </div>
+        <div class="level-left"><div class="level-item">
+          <div class="control"><input
+            type="text" class="input"
+            v-model="element.subTitle"
+            placeholder="subtitle (optional)"
+          ></div>
         </div></div>
 
-        <div class="level-right">
-          <div class="level-item right-align">
-              <div class="control">
-                <input
-                  type="text" class="input"
-                  v-model="element.Location"
-                  placeholder="Location (optional)"
-                >
-              </div>
-              <div class="control">
-                <input
-                  type="text" class="input"
-                  v-model="element.date"
-                  placeholder="Date(s) (optional)"
-                >
-              </div>
-            </div>
-          </div>
+        <div class="level-right"><div class="level-item right-align">
+            <div class="control"><input
+              type="text" class="input"
+              v-model="element.Location"
+              placeholder="Location (optional)"
+            ></div>
+            <div class="control"><input
+              type="text" class="input"
+              v-model="element.date"
+              placeholder="Date(s) (optional)"
+            ></div>
+          </div></div>
       </div>
     </div>
 
     <div class="panel-block">
-      <string-modal label='edit title' color='is-info' v-on:return="element.title = $event"/>
+      <string-modal
+        label='edit title' color='is-info'
+        v-on:return="element.title = $event"
+      />
     </div>
 
     <div class="panel-block" v-for="(li, index) in element.lineItems" :key="index">
