@@ -13,7 +13,15 @@
           <about-you :about="resume.about"/>
 
           <h1 class="subtitle is-2">Your Sections</h1>
-          <section-form-list :sections="resume.sections"/>
+          <div>
+            <template v-if="resume.sections.length">
+              <section-form
+                v-for="section in resume.sections" :key="section.name"
+                :section="section"
+              />
+            </template>
+            <p v-else>create your first section →</p>
+          </div>
       </div>
 
       <div class="column">
@@ -30,7 +38,7 @@
 <script>
 import StringModal from "~/components/general/modals/StringModal.vue";
 
-import SectionFormList from "~/components/input/SectionFormList.vue";
+import SectionForm from "~/components/input/SectionForm.vue";
 import AboutYou from "~/components/input/AboutYou.vue";
 import FloatingSideBar from "~/components/input/FloatingSideBar.vue";
 
@@ -39,7 +47,7 @@ import {} from "~/assets/js/templateFilter.js";
 export default {
   components: {
     StringModal,
-    SectionFormList,
+    SectionForm,
     AboutYou,
     FloatingSideBar
   },
@@ -59,7 +67,7 @@ export default {
   },
   methods: {
     createSection(newSection) {
-      this.resume.sections.push({ name: newSection, elements: [] });
+      this.resume.sections.push({ name: newSection, elements: [''] });
     },
     sendresume() {
       return;
