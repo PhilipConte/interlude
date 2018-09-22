@@ -78,9 +78,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.two-thirds {
-  max-width: 75%;
-}
 .right-align {
   display: flex;
   flex-direction: column;
@@ -90,6 +87,6 @@ input {
   margin-bottom: 2px;
 }
 .level {
-  width: -webkit-fill-available;
+  width: 100%;
 }
 </style>
