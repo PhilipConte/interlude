@@ -1,48 +1,50 @@
 <template>
-  <div class="box">
-    <div class="level">
-      <div class="level-left"><div class="level-item">
-        <h1 class="subtitle">{{ element.title }}</h1>
-      </div></div>
+  <div class="panel">
+    <p class="panel-heading">{{ element.title }}</p>
 
-      <div class="level-right">
-        <div class="level-item">
-          <string-modal label='edit title' color='is-info' v-on:return="element.title = $event"/>
-        </div>
-        <div class="level-item right-align">
-            <div class="control">
-              <input
-                type="text" class="input"
-                v-model="element.Location"
-                placeholder="Location (optional)"
-              >
+    <div class="panel-block">
+      <div class="level">
+        <div class="level-left"><div>
+          <div class="control">
+            <input
+              type="text" class="input"
+              v-model="element.subTitle"
+              placeholder="subtitle (optional)"
+            >
+          </div>
+        </div></div>
+
+        <div class="level-right">
+          <div class="level-item right-align">
+              <div class="control">
+                <input
+                  type="text" class="input"
+                  v-model="element.Location"
+                  placeholder="Location (optional)"
+                >
+              </div>
+              <div class="control">
+                <input
+                  type="text" class="input"
+                  v-model="element.date"
+                  placeholder="Date(s) (optional)"
+                >
+              </div>
             </div>
-            <div class="control">
-              <input
-                type="text" class="input"
-                v-model="element.date"
-                placeholder="Date(s) (optional)"
-              >
-            </div>
-        </div>
+          </div>
       </div>
     </div>
-    <hr>
 
-    <div class="control">
-      <input
-        type="text" class="input two-thirds"
-        v-model="element.subTitle"
-        placeholder="subtitle (optional)"
-      >
+    <div class="panel-block">
+      <string-modal label='edit title' color='is-info' v-on:return="element.title = $event"/>
     </div>
-    <div class="columns"><div class="column">
+
+    <div class="panel-block" v-for="(li, index) in element.lineItems" :key="index">
       <line-item
-        v-for="(li, index) in element.lineItems"
-        v-bind:value="element.lineItems[index]" :key="index" :index="index"
+        v-bind:value="element.lineItems[index]" :index="index"
         v-on:input="updateLi($event)"
       />
-    </div></div>
+    </div>
   </div>
 </template>
 
@@ -86,5 +88,8 @@ export default {
 input {
   margin-top: 2px;
   margin-bottom: 2px;
+}
+.level {
+  width: -webkit-fill-available;
 }
 </style>
