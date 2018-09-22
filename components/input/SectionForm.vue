@@ -21,21 +21,27 @@
 
       <hr>
 
-        <ul v-if="section.elements.length">
-          <li v-for="element in section.elements" :key="element.title">
-            <element-form :element="element"/>
-          </li>
-        </ul>
+        <template v-if="section.elements.length">
+          <draggable
+            v-model="section.elements" @start="drag=true" @end="drag=false"
+          >
+            <element-form v-for="element in section.elements" :key="element.title"
+              :element="element"
+            />
+          </draggable>
+        </template>
         <p v-else align="center">create your first element ↑</p>
   </div>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import StringModal from "~/components/general/modals/StringModal.vue";
 import ElementForm from "~/components/input/ElementForm.vue";
 
 export default {
   components: {
+    draggable,
     StringModal,
     ElementForm
   },
