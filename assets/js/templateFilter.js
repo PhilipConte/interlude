@@ -3,7 +3,7 @@
 const tag = "%$";
 
 //exports
-export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace};
+export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace,templateDriver};
 
 // Method to run all other methods
 // files for whole template and for each section
