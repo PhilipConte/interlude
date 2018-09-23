@@ -1,0 +1,14 @@
+%$Name
+%$Email
+%$PhoneNum
+%$Address
+
+%$Other
+
+%$Multi(Sections)<
+%$Title \\
+%$Multi(Elements)<
+%$Title \hfill %$Location \\
+%$Subtitle \hfill %$Date \\
+%$Multi(LineItems)<
+%$Item \\> \\> \\>

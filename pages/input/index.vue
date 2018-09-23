@@ -47,7 +47,7 @@ import SectionForm from "~/components/input/SectionForm.vue";
 import AboutYou from "~/components/input/AboutYou.vue";
 import FloatingSideBar from "~/components/input/FloatingSideBar.vue";
 
-import {} from "~/assets/js/templateFilter.js";
+import {loadTextFile, multiTagFindAndReplace, plainTagFindAndReplace} from "~/assets/js/templateFilter.js";
 
 export default {
   components: {

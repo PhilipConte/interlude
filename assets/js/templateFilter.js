@@ -5,6 +5,30 @@ const tag = "%$";
 //exports
 export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace};
 
+// Method to run all other methods
+// files for whole template and for each section
+function templateDriver(templateFile, tagJSON, sectionFile)
+{
+  var templateStr = loadTextFile(templateFile);
+  var outputStr = "";
+  if (typeof sectionFile !== "undefined") {
+    var sectionStr = loadTextFile(sectionFile);
+    templateStr = sectionInserter(templateStr, sectionStr);
+  }
+  templateStr = multiTagFindAndReplace(templateStr, tagJson);
+  templateStr = plainTagFindAndReplace(templateStr, tagJSON);
+  console.log(templateStr);
+}
+
+
+//Method to insert the section str into the template str.
+function sectionInserter(templateStr, sectionStr)
+{
+  var sectionTag = "%$SectionTemplateGoesHere";
+  templateStr = templateStr.replace(sectionTag, sectionStr);
+  return templateStr;
+
+}
 
 
 // Method that loads the textfile from the server
@@ -45,12 +69,16 @@ function delimPairs(str, location, leftDelim, rightDelim)
 
 
 // Method to look through the template str and find and Multi Tags
-// Example "%$Multi(tagStr)< this is a thing %$Opt(name)<other thing> //>"
+// str is the whole file string
+// Example "%$Multi(tagStr)< $#title %$Name //>"
 function multiTagFindAndReplace(str, tagJSON)
 {
-  var tag = "%$";
-  var searchTerm = tag+"Multi";
+  var tag = "";
+  var searchTerm = "%$Multi";
   var multiPos = str.search(searchTerm);
+  if (multiPos = -1) {
+    return str;
+  }
   tag = str.slice(multiPos+searchTerm.length+1);
   var tagEnd = str.indexOf(')');
   tag = tag.slice(0,tagEnd);
@@ -59,13 +87,18 @@ function multiTagFindAndReplace(str, tagJSON)
   var closedTagLoc = delimPairs(str, openTagLoc, '<', '>')+1;
   var multiString = str.slice(openTagLoc, closedTagLoc);
 
-  var numberOfElemnts = 3; // TODO: arbitrary choice to be change later
-
-  for (var i = 0; i < numberOfElemnts; i++) {
-
+  if (multiString.includes(searchTerm)) {
+    multiString = multiTagFindAndReplace(multiString, tagJson.tag)
   }
 
-  console.log(str.slice(openTagLoc,closedTagLoc));
+  var numberOfElemnts = tagJson.tag.length; // TODO: make sure this works?
+  var newMultiBlock = ""
+  for (var i = 0; i < numberOfElemnts; i++) {
+    newMultiBlock = newMultiBlock+ plainTagFindAndReplace(multiStr, tagJSON.tag);
+  }
+  str = str.slice(0,multiPos)+newMultiBlock+multiTagFindAndReplace(str.slice(closedTagLoc),tagJSON);
+  console.log(str);
+  return str;
 }
 
 
@@ -87,7 +120,9 @@ function plainTagFindAndReplace(str, tagJSON)
   var outputStr = substrings[0];
   for (var i = 1; i < substrings.length; i++) {
     keyStr = findKey(substrings[i],key.length)
-    outputStr += tagJSON[keyStr]+substrings[i].slice(key.length+keyStr.length);
+    if (tagJSON[keyStr]!=null) {
+      outputStr += tagJSON[keyStr] +substrings[i].slice(key.length+keyStr.length);
+    }
   }
 
   return outputStr;
