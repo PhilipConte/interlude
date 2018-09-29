@@ -20,6 +20,8 @@
             >
               <section-form
                 v-for="section in resume.sections" :key="section.name"
+                @remSection="remSection"
+                @remElement="remElement"
                 :section="section"
               />
             </draggable>
@@ -47,7 +49,12 @@ import SectionForm from "~/components/input/SectionForm.vue";
 import AboutYou from "~/components/input/AboutYou.vue";
 import FloatingSideBar from "~/components/input/FloatingSideBar.vue";
 
-import {loadTextFile, multiTagFindAndReplace, plainTagFindAndReplace, templateDriver} from "~/assets/js/templateFilter.js";
+import {
+  loadTextFile,
+  multiTagFindAndReplace,
+  plainTagFindAndReplace,
+  templateDriver
+} from "~/assets/js/templateFilter.js";
 
 export default {
   components: {
@@ -76,8 +83,16 @@ export default {
       this.resume.sections.push({ name: newSection, elements: [] });
     },
     sendresume() {
-      templateDriver("../assets/js/testTemplate.txt",this.resume);
+      templateDriver("../assets/js/testTemplate.txt", this.resume);
       return;
+    },
+    remSection(section) {
+      this.resume.sections = this.resume.sections.filter(s => s != section);
+    },
+    remElement(section, element) {
+      let i = this.resume.sections.indexOf(section);
+      let elements = this.resume.sections[i].elements;
+      this.resume.sections[i].elements = elements.filter(e => e != element);
     }
   }
 };

@@ -7,6 +7,14 @@
 
         <div class="level-right">
           <div class="level-item">
+            <button
+              class="button is-danger"
+              @click="$emit('remSection', section)"
+            >
+              delete
+            </button>
+          </div>
+          <div class="level-item">
             <string-modal
               label='edit name'
               color='is-info'
@@ -26,6 +34,7 @@
             v-model="section.elements" @start="drag=true" @end="drag=false"
           >
             <element-form v-for="element in section.elements" :key="element.title"
+              @remElement="$emit('remElement', section, $event)"
               :element="element"
             />
           </draggable>

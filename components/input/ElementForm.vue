@@ -28,10 +28,22 @@
     </div>
 
     <div class="panel-block">
-      <string-modal
-        label='edit title' color='is-info'
-        v-on:return="element.title = $event"
-      />
+      <div class="level"><div class="level-left">
+        <div class="level-item">
+          <button
+            class="button is-danger"
+            @click="$emit('remElement', element)"
+          >
+            delete
+          </button>
+        </div>
+        <div class="level-item">
+          <string-modal
+            label='edit title' color='is-info'
+            v-on:return="element.title = $event"
+          />
+        </div>
+      </div></div>
     </div>
 
     <div class="panel-block" v-for="(li, index) in element.lineItems" :key="index">
