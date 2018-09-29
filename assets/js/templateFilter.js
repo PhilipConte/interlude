@@ -15,12 +15,13 @@ function templateDriver(templateFile, tagJSON, sectionFile)
   }).then(function(text){
     templateStr = text;
   });
+  console.log(templateStr);
   var outputStr = "";
   if (typeof sectionFile !== "undefined") {
     var sectionStr = loadTextFile(sectionFile);
     templateStr = sectionInserter(templateStr, sectionStr);
   }
-  templateStr = multiTagFindAndReplace(templateStr, tagJson);
+  templateStr = multiTagFindAndReplace(templateStr, tagJSON);
   templateStr = plainTagFindAndReplace(templateStr, tagJSON);
   console.log(templateStr);
 }
