@@ -76,7 +76,7 @@ export default {
       this.resume.sections.push({ name: newSection, elements: [] });
     },
     sendresume() {
-      templateDriver("../assets/js/testTemplate.txt",this.resume);
+      templateDriver("../testTemplate.txt",this.resume);
       return;
     }
   }
