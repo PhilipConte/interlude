@@ -83,11 +83,7 @@ export default {
       this.resume.sections.push({ name: newSection, elements: [] });
     },
     sendresume() {
-<<<<<<< HEAD
-      templateDriver("../testTemplate.txt",this.resume, null);
-=======
       templateDriver("../testTemplate.txt", this.resume);
->>>>>>> 09930b2fb51344b64990418695a6ae75099270aa
       return;
     },
     remSection(section) {
