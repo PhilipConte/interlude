@@ -49,7 +49,8 @@
     <div class="panel-block" v-for="(li, index) in element.lineItems" :key="index">
       <line-item
         :value="element.lineItems[index]" :index="index"
-        @input="updateLi($event)" :placeholder="'line-item'"
+        :placeholder="'line-item'"
+        @input="updateLi($event)"
       />
     </div>
   </div>
@@ -69,16 +70,9 @@ export default {
   },
   props: ["section", "element"],
   methods: {
-    ...mapMutations(["removeElement", "updateLineItems"]),
+    ...mapMutations(["removeElement", "updateElementLineItems"]),
     updateLi(o) {
-      Vue.set(this.element.lineItems, o.index, o.value);
-
-      let numEmpties = this.element.lineItems.filter(i => !i.length).length;
-      if (!o.value.length && numEmpties > 1) {
-        Vue.delete(this.element.lineItems, o.index);
-      } else if (numEmpties == 0) {
-        this.element.lineItems.push("");
-      }
+      this.updateElementLineItems({ list: this.element.lineItems, ...o });
     }
   }
 };

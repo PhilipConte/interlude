@@ -37,11 +37,28 @@ const createStore = () => {
           payload.section, 'elements',
           payload.section.elements.filter(e => e != payload.element)
         );
+      },
+      updateAboutLineItems(state, payload) {
+        updateLineItems({ list: state.resume.about.others, ...payload });
+      },
+      updateElementLineItems(state, payload) {
+        updateLineItems(payload);
       }
     }
   })
 };
 
 const setPush = (list, obj) => Vue.set(list, list.length, obj);
+
+const updateLineItems = (o) => {
+  Vue.set(o.list, o.index, o.value);
+
+  let numEmpties = o.list.filter(i => !i.length).length;
+  if (!o.value.length && numEmpties > 1) {
+    Vue.delete(o.list, o.index);
+  } else if (numEmpties == 0) {
+    o.list.push("");
+  }
+};
 
 export default createStore
