@@ -32,7 +32,7 @@
         <div class="level-item">
           <button
             class="button is-danger"
-            @click="$emit('remElement', element)"
+            @click="removeElement({section: section, element: element})"
           >
             delete
           </button>
@@ -57,6 +57,8 @@
 
 <script>
 import Vue from "vue";
+import { mapMutations } from "vuex";
+
 import StringModal from "~/components/general/modals/StringModal.vue";
 import LineItem from "~/components/input/LineItem.vue";
 
@@ -65,11 +67,9 @@ export default {
     StringModal,
     LineItem
   },
-  props: ["element"],
-  data() {
-    return {};
-  },
+  props: ["section", "element"],
   methods: {
+    ...mapMutations(["removeElement", "updateLineItems"]),
     updateLi(o) {
       Vue.set(this.element.lineItems, o.index, o.value);
 

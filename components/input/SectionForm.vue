@@ -9,7 +9,7 @@
           <div class="level-item">
             <button
               class="button is-danger"
-              @click="$emit('remSection', section)"
+              @click="removeSection(section)"
             >
               delete
             </button>
@@ -22,7 +22,10 @@
             />
           </div>
           <div class="level-item">
-            <string-modal label='add an element' v-on:return="createElement"/>
+            <string-modal
+              label='add an element'
+              @return="addElement({title: $event, section: section})"
+            />
           </div>
         </div>
       </div>
@@ -34,8 +37,7 @@
             v-model="section.elements" @start="drag=true" @end="drag=false"
           >
             <element-form v-for="element in section.elements" :key="element.title"
-              @remElement="$emit('remElement', section, $event)"
-              :element="element"
+              :section="section" :element="element"
             />
           </draggable>
         </template>
@@ -44,6 +46,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import draggable from "vuedraggable";
 import StringModal from "~/components/general/modals/StringModal.vue";
 import ElementForm from "~/components/input/ElementForm.vue";
@@ -55,20 +59,7 @@ export default {
     ElementForm
   },
   props: ["section"],
-  data() {
-    return {};
-  },
-  methods: {
-    createElement(element) {
-      this.section.elements.push({
-        title: element,
-        subTitle: "",
-        location: "",
-        date: "",
-        lineItems: [""]
-      });
-    }
-  }
+  methods: mapMutations(['removeSection', 'addElement'])
 };
 </script>
 
