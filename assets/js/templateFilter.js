@@ -11,16 +11,18 @@ function templateDriver(templateFile, tagJSON, sectionFile) {
   var templateStr;// = loadTextFile(templateFile);
   fetch(templateFile)
     .then((response) => response.text())
-    .then((text) => templateStr = text);
-  console.log(templateStr);
-  var outputStr = "";
-  if (typeof sectionFile !== "undefined") {
-    var sectionStr = loadTextFile(sectionFile);
-    templateStr = sectionInserter(templateStr, sectionStr);
-  }
-  templateStr = multiTagFindAndReplace(templateStr, tagJSON);
-  templateStr = plainTagFindAndReplace(templateStr, tagJSON);
-  console.log(templateStr);
+    .then((text) => {
+      templateStr = text;
+      console.log(templateStr);
+      var outputStr = "";
+      if (typeof sectionFile !== "undefined") {
+        var sectionStr = loadTextFile(sectionFile);
+        templateStr = sectionInserter(templateStr, sectionStr);
+      }
+      templateStr = multiTagFindAndReplace(templateStr, tagJSON);
+      templateStr = plainTagFindAndReplace(templateStr, tagJSON);
+      console.log(templateStr);
+    });
 }
 
 
@@ -29,7 +31,6 @@ function sectionInserter(templateStr, sectionStr) {
   var sectionTag = "%$SectionTemplateGoesHere";
   templateStr = templateStr.replace(sectionTag, sectionStr);
   return templateStr;
-
 }
 
 
@@ -64,7 +65,6 @@ function delimPairs(str, location, leftDelim, rightDelim) {
       return i;
     }
   }
-
 }
 
 
@@ -122,7 +122,6 @@ function plainTagFindAndReplace(str, tagJSON) {
       outputStr += tagJSON[keyStr] + substrings[i].slice(key.length + keyStr.length);
     }
   }
-
   return outputStr;
 }
 
