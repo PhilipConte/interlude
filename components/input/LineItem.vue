@@ -5,22 +5,21 @@
   :placeholder="placeholder +' (optional)'"
   v-bind="$attrs"
   v-bind:value="value"
-  v-on="inputListeners"
+  v-on="listeners"
 ></div>
 </template>
 
 <script>
 export default {
   inheritAttrs: false,
-  props: ["value", "index", "placeholder",],
+  props: ["value", "index", "placeholder"],
   computed: {
-    inputListeners() {
-      var vm = this;
-      return Object.assign({}, this.$listeners, {
-        input(event) {
-          vm.$emit("input", { value: event.target.value, index: vm.index });
-        }
-      });
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: event =>
+          this.$emit("input", { value: event.target.value, index: this.index })
+      };
     }
   }
 };
