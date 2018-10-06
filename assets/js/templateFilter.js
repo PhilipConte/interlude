@@ -10,11 +10,9 @@ export{delimPairs,loadTextFile,multiTagFindAndReplace,plainTagFindAndReplace,tem
 function templateDriver(templateFile, tagJSON, sectionFile)
 {
   var templateStr;// = loadTextFile(templateFile);
-  fetch(templateFile).then(function(response){
-    return response.text();
-  }).then(function(text){
-    templateStr = text;
-  });
+  fetch(templateFile)
+  .then((response) => response.text())
+  .then((text) => templateStr = text);
   console.log(templateStr);
   var outputStr = "";
   if (typeof sectionFile !== "undefined") {
@@ -56,11 +54,8 @@ function loadTextFile(file)
 
 function fetchTextFile(file)
 {
-  fetch(file).then(function(response){
-    return response.text();
-  }).then(function(text){
-    outputStr = text;
-  });
+  fetch(file).then((response) => response.text())
+  .then((text) => outputStr = text);
 }
 
 // location is the index of the first Delim
