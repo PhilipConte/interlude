@@ -76,7 +76,11 @@ export default {
       this.resume.sections.push({ name: newSection, elements: [] });
     },
     sendresume() {
+<<<<<<< HEAD
       templateDriver("~/assets/js/testTemplate.txt",this.resume);
+=======
+      templateDriver("../testTemplate.txt", this.resume);
+>>>>>>> b2adbbf452bff1e1f053cc8b243059b8fa5c69cd
       return;
     }
   }
