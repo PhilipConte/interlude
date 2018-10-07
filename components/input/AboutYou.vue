@@ -24,7 +24,7 @@
     <line-item
       v-for="(o, i) in about.others" :key="i"
       :value="about.others[i]" :index="i"
-      @input="updateOther($event)"
+      @input="updateAboutLineItems"
       :placeholder="'other'"
     />
   </div>
@@ -32,24 +32,14 @@
 
 <script>
 import Vue from "vue";
+import { mapMutations } from "vuex";
 
 import LineItem from "~/components/input/LineItem.vue";
 
 export default {
   props: ["about"],
   components: { LineItem },
-  methods: {
-    updateOther(o) {
-      Vue.set(this.about.others, o.index, o.value);
-
-      let numEmpties = this.about.others.filter(i => !i.length).length;
-      if (!o.value.length && numEmpties > 1) {
-        Vue.delete(this.about.others, o.index);
-      } else if (numEmpties == 0) {
-        this.about.others.push("");
-      }
-    }
-  }
+  methods: mapMutations(["updateAboutLineItems"])
 };
 </script>
 

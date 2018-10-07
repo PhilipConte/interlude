@@ -28,17 +28,14 @@
       </div>
 
       <div class="column">
-        <floating-side-bar
-          :sections="resume.sections"
-          @createSection="createSection"
-          @sendresume="sendresume"
-        />
+        <floating-side-bar :sections="resume.sections"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import draggable from "vuedraggable";
 
 import StringModal from "~/components/general/modals/StringModal.vue";
@@ -47,8 +44,11 @@ import SectionForm from "~/components/input/SectionForm.vue";
 import AboutYou from "~/components/input/AboutYou.vue";
 import FloatingSideBar from "~/components/input/FloatingSideBar.vue";
 
+<<<<<<< HEAD
 import {loadTextFile, multiTagFindAndReplace, plainTagFindAndReplace, templateDriver} from "~/assets/js/templateFilter.js";
 
+=======
+>>>>>>> 610239ea03a16cfc770741fa56a928bad5853ba5
 export default {
   components: {
     draggable,
@@ -57,6 +57,7 @@ export default {
     AboutYou,
     FloatingSideBar
   },
+<<<<<<< HEAD
   data() {
     return {
       resume: {
@@ -84,6 +85,9 @@ export default {
       return;
     }
   }
+=======
+  computed: mapState(["resume"])
+>>>>>>> 610239ea03a16cfc770741fa56a928bad5853ba5
 };
 </script>
 
