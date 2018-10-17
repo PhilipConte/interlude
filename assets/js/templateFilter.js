@@ -7,22 +7,17 @@ export { delimPairs, loadTextFile, multiTagFindAndReplace, plainTagFindAndReplac
 
 // Method to run all other methods
 // files for whole template and for each section
-function templateDriver(templateFile, tagJSON, sectionFile) {
-  var templateStr;// = loadTextFile(templateFile);
-  fetch(templateFile)
-    .then((response) => response.text())
-    .then((text) => {
-      templateStr = text;
-      console.log(templateStr);
-      var outputStr = "";
-      if (typeof sectionFile !== "undefined") {
-        var sectionStr = loadTextFile(sectionFile);
-        templateStr = sectionInserter(templateStr, sectionStr);
-      }
-      templateStr = multiTagFindAndReplace(templateStr, tagJSON);
-      templateStr = plainTagFindAndReplace(templateStr, tagJSON);
-      console.log(templateStr);
-    });
+async function templateDriver(templateFile, tagJSON, sectionFile) {
+  var templateStr = await fetch(templateFile).then((response) => response.text())
+  console.log(templateStr);
+  var outputStr = "";
+  if (typeof sectionFile !== "undefined") {
+    var sectionStr = loadTextFile(sectionFile);
+    templateStr = sectionInserter(templateStr, sectionStr);
+  }
+  templateStr = multiTagFindAndReplace(templateStr, tagJSON);
+  templateStr = plainTagFindAndReplace(templateStr, tagJSON);
+  console.log(templateStr);
 }
 
 
@@ -117,9 +112,9 @@ function plainTagFindAndReplace(str, tagJSON) {
   var substrings = str.split(tag); //Assume that the first substring does not start with a tag
   var outputStr = substrings[0];
   for (var i = 1; i < substrings.length; i++) {
-    keyStr = findKey(substrings[i], key.length)
+    keyStr = findKey(substrings[i], tag.length)
     if (tagJSON[keyStr] != null) {
-      outputStr += tagJSON[keyStr] + substrings[i].slice(key.length + keyStr.length);
+      outputStr += tagJSON[keyStr] + substrings[i].slice(tag.length + keyStr.length);
     }
   }
   return outputStr;
