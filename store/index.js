@@ -9,7 +9,7 @@ const createStore = () => {
           name: "",
           email: "",
           phone: "",
-          adress: "",
+          address: "",
           others: [""]
         },
         sections: []
