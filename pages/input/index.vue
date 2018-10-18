@@ -44,11 +44,6 @@ import SectionForm from "~/components/input/SectionForm.vue";
 import AboutYou from "~/components/input/AboutYou.vue";
 import FloatingSideBar from "~/components/input/FloatingSideBar.vue";
 
-<<<<<<< HEAD
-import {loadTextFile, multiTagFindAndReplace, plainTagFindAndReplace, templateDriver} from "~/assets/js/templateFilter.js";
-
-=======
->>>>>>> 610239ea03a16cfc770741fa56a928bad5853ba5
 export default {
   components: {
     draggable,
@@ -57,37 +52,7 @@ export default {
     AboutYou,
     FloatingSideBar
   },
-<<<<<<< HEAD
-  data() {
-    return {
-      resume: {
-        about: {
-          name: "",
-          email: "",
-          phone: "",
-          adress: "",
-          others: [""]
-        },
-        sections: []
-      }
-    };
-  },
-  methods: {
-    createSection(newSection) {
-      this.resume.sections.push({ name: newSection, elements: [] });
-    },
-    sendresume() {
-<<<<<<< HEAD
-      templateDriver("~/assets/js/testTemplate.txt",this.resume);
-=======
-      templateDriver("../testTemplate.txt", this.resume);
->>>>>>> b2adbbf452bff1e1f053cc8b243059b8fa5c69cd
-      return;
-    }
-  }
-=======
   computed: mapState(["resume"])
->>>>>>> 610239ea03a16cfc770741fa56a928bad5853ba5
 };
 </script>
 
