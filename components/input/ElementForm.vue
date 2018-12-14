@@ -15,7 +15,7 @@
         <div class="level-right"><div class="level-item right-align">
             <div class="control"><input
               type="text" class="input"
-              v-model="element.Location"
+              v-model="element.location"
               placeholder="Location (optional)"
             ></div>
             <div class="control"><input
