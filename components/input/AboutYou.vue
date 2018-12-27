@@ -18,7 +18,7 @@
     <div class="control"><input
       type="text" class="input"
       v-model="about.address"
-      placeholder="address (optional"
+      placeholder="address (optional)"
     ></div>
     <hr>
     <line-item
