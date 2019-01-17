@@ -1,14 +1,23 @@
-%$Name
-%$Email
-%$PhoneNum
-%$Address
+Resume
+%$name$%
+%$email$%
+%$phone$%
+%$address$%
 
-%$Other
+%$Multi(others)$%
+  %$item$%
+%$Multi(others)$%
 
-%$Multi(Sections)<
-%$Title \\
-%$Multi(Elements)<
-%$Title \hfill %$Location \\
-%$Subtitle \hfill %$Date \\
-%$Multi(LineItems)<
-%$Item \\> \\> \\>
+%$Multi(sections)$%
+  %$name$%
+  %$Multi(elements)$%
+    %$title$%
+    %$location$%
+    %$subTitle$%
+    %$date$%
+    %$Multi(lineItems)$%
+      %$item$%
+    %$Multi(lineItems)$%
+  %$Multi(elements)$%
+%$Multi(sections)$%
+End of Resume

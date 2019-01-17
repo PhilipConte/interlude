@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { templateDriver } from "~/assets/js/templateFilter.js";
+import { templateDriver } from "~/assets/js/templateFiller.js";
 import { mapMutations } from "vuex";
 import StringModal from "~/components/general/modals/StringModal.vue";
 
